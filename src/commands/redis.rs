@@ -16,7 +16,7 @@ use tantivy::Index;
 use tantivy::IndexWriter;
 use time::PreciseTime;
 
-pub fn run_index_cli(argmatch: &ArgMatches) -> Result<(), String> {
+pub fn run_redis_cli(argmatch: &ArgMatches) -> Result<(), String> {
     let index_directory = PathBuf::from(argmatch.value_of("index").unwrap());
     let document_source = argmatch
         .value_of("file")
