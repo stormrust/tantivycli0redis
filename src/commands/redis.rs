@@ -11,9 +11,7 @@ use std::path::PathBuf;
 use std::thread;
 use tantivy;
 use tantivy::merge_policy::NoMergePolicy;
-//use tantivy::Document;
 use tantivy::Index;
-//use tantivy::IndexWriter;
 use time::PreciseTime;
 
 pub fn run_redis_cli(argmatch: &ArgMatches) -> Result<(), String> {
