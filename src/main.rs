@@ -151,6 +151,7 @@ fn main() {
     let run_cli = match subcommand {
         "new" => run_new_cli,
         "index" => run_index_cli,
+        "redis" => run_redis_cli,
         "serve" => run_serve_cli,
         "search" => run_search_cli,
         "merge" => run_merge_cli,

@@ -1,3 +1,4 @@
+use crate::timer::TimerTree;
 use clap::ArgMatches;
 use std::fs::File;
 use std::io;
@@ -9,7 +10,6 @@ use tantivy::collector::{Count, TopDocs};
 use tantivy::query::QueryParser;
 use tantivy::schema::{Field, Schema};
 use tantivy::Index;
-use crate::timer::TimerTree;
 
 pub fn run_bench_cli(matches: &ArgMatches) -> Result<(), String> {
     let index_path = PathBuf::from(matches.value_of("index").unwrap());

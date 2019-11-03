@@ -1,3 +1,4 @@
+use crate::timer::TimerTree;
 /// This tantivy command starts a http server (by default on port 3000)
 ///
 /// Currently the only entrypoint is /api/
@@ -34,11 +35,10 @@ use tantivy::schema::FieldType;
 use tantivy::schema::NamedFieldDocument;
 use tantivy::schema::Schema;
 use tantivy::tokenizer::*;
-use tantivy::{DocAddress, Score};
 use tantivy::Document;
 use tantivy::Index;
 use tantivy::IndexReader;
-use crate::timer::TimerTree;
+use tantivy::{DocAddress, Score};
 use urlencoded::UrlEncodedQuery;
 
 pub fn run_serve_cli(matches: &ArgMatches) -> Result<(), String> {
