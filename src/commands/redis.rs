@@ -80,49 +80,6 @@ fn run_redis(
             }
         });
     }
-/*
-    drop(doc_sender);
-
-    let mut index_writer = if num_threads > 0 {
-        index.writer_with_num_threads(num_threads, buffer_size_per_thread)
-    } else {
-        index.writer(buffer_size_per_thread)
-    }?;
-
-    if no_merge {
-        index_writer.set_merge_policy(Box::new(NoMergePolicy));
-    }
-
-    let start_overall = PreciseTime::now();
-    let index_result = index_documents(&mut index_writer, doc_receiver);
-    {
-        let duration = start_overall.to(PreciseTime::now());
-        info!("Indexing the documents took {} s", duration.num_seconds());
-    }
-
-    match index_result {
-        Ok(docstamp) => {
-            println!("Commit succeed, docstamp at {}", docstamp);
-            println!("Waiting for merging threads");
-            index_writer.wait_merging_threads()?;
-            println!("Terminated successfully!");
-            {
-                let duration = start_overall.to(PreciseTime::now());
-                info!(
-                    "Indexing the documents took {} s overall (indexing + merge)",
-                    duration.num_seconds()
-                );
-            }
-            Ok(())
-        }
-        Err(e) => {
-            println!("Error during indexing, rollbacking.");
-            index_writer.rollback().unwrap();
-            println!("Rollback succeeded");
-            Err(e)
-        }
-    }
-*/
     Ok(())
 }
 
