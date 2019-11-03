@@ -11,9 +11,9 @@ use std::path::PathBuf;
 use std::thread;
 use tantivy;
 use tantivy::merge_policy::NoMergePolicy;
-use tantivy::Document;
+//use tantivy::Document;
 use tantivy::Index;
-use tantivy::IndexWriter;
+//use tantivy::IndexWriter;
 use time::PreciseTime;
 
 pub fn run_redis_cli(argmatch: &ArgMatches) -> Result<(), String> {
@@ -31,7 +31,7 @@ pub fn run_redis_cli(argmatch: &ArgMatches) -> Result<(), String> {
     let buffer_size = value_t!(argmatch, "memory_size", usize)
         .map_err(|_| format!("Failed to read the buffer size argument as an integer."))?;
     let buffer_size_per_thread = buffer_size / num_threads;
-    run_index(
+    run_redis(
         index_directory,
         document_source,
         buffer_size_per_thread,
@@ -41,7 +41,7 @@ pub fn run_redis_cli(argmatch: &ArgMatches) -> Result<(), String> {
     .map_err(|e| format!("Indexing failed : {:?}", e))
 }
 
-fn run_index(
+fn run_redis(
     directory: PathBuf,
     document_source: DocumentSource,
     buffer_size_per_thread: usize,
@@ -80,6 +80,7 @@ fn run_index(
             }
         });
     }
+/*
     drop(doc_sender);
 
     let mut index_writer = if num_threads > 0 {
@@ -121,31 +122,8 @@ fn run_index(
             Err(e)
         }
     }
-}
-
-fn index_documents(
-    index_writer: &mut IndexWriter,
-    doc_receiver: chan::Receiver<Document>,
-) -> tantivy::Result<u64> {
-    let group_count = 100_000;
-    let mut num_docs = 0;
-    let mut cur = PreciseTime::now();
-    for doc in doc_receiver {
-        index_writer.add_document(doc);
-        if num_docs > 0 && (num_docs % group_count == 0) {
-            println!("{} Docs", num_docs);
-            let new = PreciseTime::now();
-            let elapsed = cur.to(new);
-            println!(
-                "{:?} docs / hour",
-                group_count * 3600 * 1_000_000 as u64
-                    / (elapsed.num_microseconds().unwrap() as u64)
-            );
-            cur = new;
-        }
-        num_docs += 1;
-    }
-    index_writer.commit()
+*/
+    Ok(())
 }
 
 enum DocumentSource {
